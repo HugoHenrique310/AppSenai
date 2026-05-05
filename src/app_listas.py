@@ -64,13 +64,22 @@ def main(page: flet.Page):
                     trailing=PopupMenuButton(
                         icon=Icons.MORE_VERT,
                         items=[
-                            PopupMenuItem("Ver detalhes", icon=Icons.REMOVE_RED_EYE),
+                            PopupMenuItem("Ver detalhes", icon=Icons.REMOVE_RED_EYE,on_click=lambda _, pessoa=item: ver_detalhes(pessoa)),
                             PopupMenuItem("Excluir", icon=Icons.DELETE, on_click=lambda: excluir(item)),
                         ]
                     ),
 
                 )
             )
+
+    def ver_detalhes(pessoa):
+        text_nome.value = pessoa.nome
+        text_profissao.value = pessoa.profissao
+        text_sexo.value = pessoa.sexo
+
+        navegar("/detalhes")
+
+
 
     def excluir(item):
         lista_dados.remove(item)
@@ -201,6 +210,27 @@ def main(page: flet.Page):
                 )
             )
 
+        elif page.route == "/detalhes":
+            page.views.append(
+                View(
+                    route="/detalhes",
+                    controls=[
+                        flet.AppBar(
+                            title="Detalhes",
+                        ),
+                        text_nome,
+                        text_profissao,
+                        text_sexo,
+                    ]
+                )
+            )
+
+
+
+
+
+
+
     # Voltar
     async def view_pop(e):
         if e.view is not None:
@@ -221,6 +251,9 @@ def main(page: flet.Page):
             DropdownOption("Feminino"),
         ],
     )
+    text_nome = Text(weight=FontWeight.BOLD, size=24)
+    text_profissao = Text()
+    text_sexo = Text()
 
     # eventos
     page.on_route_change = route_change
