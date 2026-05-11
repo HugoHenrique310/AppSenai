@@ -16,6 +16,7 @@ def main(page: flet.Page):
 
     # Funções
     # Navegar
+
     def navegar(route):
         asyncio.create_task(
             page.push_route(route)

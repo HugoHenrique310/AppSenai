@@ -2,6 +2,7 @@ import requests
 
 base_url = "https://dragonball-api.com/api"
 
+
 # Criar as funcoes que irao pegar os dados da api
 # nome da funcao deve ter o prefixo get, post ou put
 
